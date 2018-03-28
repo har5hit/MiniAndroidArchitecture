@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ImageView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:src="@drawable/icon"
+        android:layout_margin="128dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/white"
+        xmlns:android="http://schemas.android.com/apk/res/android" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login with Github"
+        android:onClick="githubLogin"/>
+</LinearLayout>
