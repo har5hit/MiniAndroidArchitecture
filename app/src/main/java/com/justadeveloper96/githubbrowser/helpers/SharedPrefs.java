@@ -13,10 +13,12 @@ public class SharedPrefs {
     private static SharedPrefs sharedPrefs;
 
     private final SharedPreferences prefs;
+    public static final String PREFERENCE = "github_prefs";
+
 
     public SharedPrefs(Context c) {
         // editor = c.getSharedPreferences(c.getPackageName(), Context.MODE_PRIVATE).edit();
-        prefs = c.getSharedPreferences(c.getPackageName(), Context.MODE_PRIVATE);
+        prefs = c.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
     }
 
     public static void init(Context context){
