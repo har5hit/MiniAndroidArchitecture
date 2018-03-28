@@ -24,6 +24,9 @@ android {
     dataBinding{
         enabled=true
     }
+    kapt {
+        generateStubs = true
+    }
 }
 
 ext {
@@ -52,7 +55,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //android architecture components
     implementation "android.arch.lifecycle:runtime:$archComponentVersion"
-    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    implementation "android.arch.lifecycle:extensions:$archComponentVersion"
     kapt "android.arch.lifecycle:compiler:$archComponentVersion"
     implementation "android.arch.persistence.room:runtime:$archComponentVersion"
     kapt "android.arch.persistence.room:compiler:$archComponentVersion"
@@ -69,4 +72,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     provided 'javax.annotation:jsr250-api:1.0'
     implementation project(':helpers')
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 }

@@ -35,9 +35,10 @@ import javax.inject.Inject
  * Created by harshith on 06-03-2018.
  */
 
-class ListActivity @Inject constructor(val sharedPrefs: SharedPrefs) : AppCompatActivity(), IList.View {
+class ListActivity: AppCompatActivity(), IList.View {
 
-
+    @Inject
+    lateinit var sharedPrefs: SharedPrefs
 
     override fun showLoading(loading: Boolean) {
         tv_empty_filter_list.visibility = if (loading) View.VISIBLE else View.GONE
@@ -53,6 +54,7 @@ class ListActivity @Inject constructor(val sharedPrefs: SharedPrefs) : AppCompat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
 
         Toast.makeText(applicationContext,sharedPrefs.getString("oauth_token"),Toast.LENGTH_LONG).show()
         initViews()
