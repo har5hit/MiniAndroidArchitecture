@@ -19,7 +19,7 @@ The first screen which shows user to Login via github to access the app with his
 
 ### List Screen
 
-* The list of users are retrieved from the database otherwise fetched from server using githu's users api. 
+* The list of users are retrieved from the database otherwise fetched from server using github's users api. 
 
 * User can perform search or filter by name,
 
