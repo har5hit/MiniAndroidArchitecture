@@ -186,6 +186,7 @@ class ListActivity: AppCompatActivity(), IList.View {
     {
         toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
         //mDrawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.quantum_grey_600));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.quantum_grey_600));
 
         if (show) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -216,6 +217,8 @@ class ListActivity: AppCompatActivity(), IList.View {
                         super.onAnimationEnd(animation)
                         toolbar.setBackgroundColor(getThemeColor(baseContext, R.attr.colorPrimary));
                         // mDrawerLayout.setStatusBarBackgroundColor(getThemeColor(baseContext, R.attr.colorPrimaryDark));
+                        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.quantum_grey_600));
+
                     }
                 });
                 createCircularReveal.start();
@@ -241,6 +244,7 @@ class ListActivity: AppCompatActivity(), IList.View {
                 });
                 toolbar.startAnimation(animationSet);
             }
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.quantum_grey_600));
             //   mDrawerLayout.setStatusBarBackgroundColor(ThemeUtils.getThemeColor(MainActivity.this, R.attr.colorPrimaryDark));
         }
     }
