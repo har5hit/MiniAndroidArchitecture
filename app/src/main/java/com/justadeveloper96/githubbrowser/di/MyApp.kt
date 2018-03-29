@@ -2,6 +2,7 @@ package com.justadeveloper96.githubbrowser.di
 
 import android.app.Application
 import com.justadeveloper96.githubbrowser.helpers.Constants
+import com.justadeveloper96.githubbrowser.helpers.Utils
 import com.justadeveloper96.githubbrowser.repo.RoomModule
 import com.justadeveloper96.helpers.di.AppModule
 import com.justadeveloper96.helpers.di.RetrofitModule
@@ -21,6 +22,7 @@ class MyApp:Application()
         injector=DaggerAppComponent.builder().appModule(AppModule(this))
                 .roomModule(RoomModule())
                 .retrofitModule(RetrofitModule("https://api.github.com/",null,null)).build()
+        com.justadeveloper96.helpers.Utils.setContext(applicationContext)
     }
 
     fun reinitWithToken(token:String){

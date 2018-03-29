@@ -18,7 +18,7 @@ import javax.inject.Singleton
 public class RoomModule(){
     companion object {
         fun getDatabase(context: Context): DatabaseModule {
-            return Room.databaseBuilder(context.getApplicationContext(), DatabaseModule::class.java, "my_notes_db")
+            return Room.databaseBuilder(context.getApplicationContext(), DatabaseModule::class.java, "my_users_db")
                     .fallbackToDestructiveMigration()
                     .build()
         }
@@ -30,6 +30,6 @@ public class RoomModule(){
 
     @Singleton
     @Provides
-    fun providesNotesDao(db:DatabaseModule):NoteDao = db.notesDao()
+    fun providesUsersDao(db:DatabaseModule):UserDao = db.usersDao()
 
 }

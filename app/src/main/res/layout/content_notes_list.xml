@@ -41,7 +41,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar"
-        tools:listitem="@layout/list_item_note" />
+        tools:listitem="@layout/list_item_user" />
 
     <TextView
         android:layout_centerHorizontal="true"
@@ -51,9 +51,9 @@
         android:gravity="center"
         android:textSize="20sp"
         android:padding="42dp"
-        android:id="@+id/tv_empty_list"
+        android:id="@+id/tv_loading_list"
         android:visibility="gone"
-        android:drawableTop="@drawable/if_magnifyingglass_1055031"
+        android:drawableTop="@drawable/ic_cloud_sync"
         android:text="@string/empty_list_text"
         android:drawablePadding="24dp"/>
 
@@ -66,7 +66,8 @@
         android:textSize="20sp"
         android:padding="42dp"
         android:visibility="gone"
-        android:id="@+id/tv_empty_filter_list"
+        android:id="@+id/tv_empty_search_list"
+        android:drawableTop="@drawable/if_magnifyingglass_1055031"
         android:text="@string/no_results"
         android:drawablePadding="24dp"/>
 
@@ -79,7 +80,8 @@
         android:textSize="20sp"
         android:padding="42dp"
         android:visibility="gone"
-        android:id="@+id/tv_loading_list"
+        android:drawableTop="@drawable/ic_action_warn"
+        android:id="@+id/tv_error_list"
         android:text="@string/no_results"
         android:drawablePadding="24dp"/>
 

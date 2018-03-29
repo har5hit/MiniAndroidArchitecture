@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notely</string>
+    <string name="app_name">GitHubBrowser</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="save">Save</string>
     <string name="undo">Undo</string>
@@ -18,7 +18,7 @@
     <string name="title">Title</string>
     <string name="delete">Delete</string>
     <string name="gist">Gist!</string>
-    <string name="empty_list_text">Add Note!</string>
+    <string name="empty_list_text">Fetching Users!</string>
     <string name="description">Description</string>
     <string name="clear_filter">Clear</string>
     <string name="apply_filter">Apply</string>

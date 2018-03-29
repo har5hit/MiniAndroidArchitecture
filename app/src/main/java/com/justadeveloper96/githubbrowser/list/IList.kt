@@ -1,7 +1,7 @@
 package com.justadeveloper96.githubbrowser.list
 
 import android.arch.lifecycle.LiveData
-import com.justadeveloper96.githubbrowser.repo.Note
+import com.justadeveloper96.githubbrowser.repo.User
 import com.justadeveloper96.helpers.arch.Resource
 
 /**
@@ -12,13 +12,12 @@ interface IList {
     interface View{
         fun showLoading(loading: Boolean)
         fun isFilterApplied():Boolean
-        fun showEmptyNoteScreen()
-        fun showEmptyResultScreen()
+        fun showEmptyUserScreen()
+        fun showErrorScreen(error: String)
     }
     interface Actions{
-        fun getList(): LiveData<Resource<List<Note>>>;
+        fun getList(): LiveData<Resource<List<User>>>;
         fun applyFilter(name: String);
-        //        fun getData():LiveData<List<Note>>
         fun getFilters():LiveData<String>
     }
 }

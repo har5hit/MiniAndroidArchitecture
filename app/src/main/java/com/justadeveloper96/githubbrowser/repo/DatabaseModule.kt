@@ -6,7 +6,7 @@ import android.content.Context
 /**
  * Created by harshith on 06-03-2018.
  */
-@Database(entities = [(Note::class)], version = 5)
+@Database(entities = [(User::class)], version = 6)
 abstract class DatabaseModule : RoomDatabase() {
-    abstract fun notesDao(): NoteDao
+    abstract fun usersDao(): UserDao
 }

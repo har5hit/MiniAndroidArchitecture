@@ -22,13 +22,18 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        /*Handler().postDelayed({
-            startActivity(Intent(this, ListActivity::class.java))
-            finish()
-        },500)*/
 
         (applicationContext as MyApp).injector.inject(this)
 
+        checkAndLaunch()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkAndLaunch()
+    }
+
+    fun checkAndLaunch(){
         if(!sharedPrefs.getString(Constants.OAUTH_TOKEN).isNullOrEmpty())
         {
             (applicationContext as MyApp).reinitWithToken(sharedPrefs.getString(Constants.OAUTH_TOKEN))

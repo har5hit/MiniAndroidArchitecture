@@ -626,15 +626,15 @@ public class Utils {
 
     public static String getNetworkErrorText(Throwable t)
     {
-        if (t instanceof SocketException)
-        {
-            return "";
-        }
-
         if (!isNetworkAvailable())
         {
             Utils.log("no internet");
             return "No Internet Connection!";
+        }
+
+        if (t instanceof SocketException)
+        {
+            return "Server is taking too Long to Respond. Try Again Later";
         }
 
         if(t instanceof IOException)

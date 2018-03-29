@@ -59,35 +59,19 @@ dependencies {
 
     //android architecture components
 
-    //    implementation "android.arch.lifecycle:runtime:$archComponentVersion"
-
-    //    implementation "android.arch.lifecycle:extensions:$archComponentVersion"
     testImplementation "android.arch.core:core-testing:$archComponentVersionAddon"
     testImplementation "android.arch.persistence.room:testing:$archComponentVersion"
     kapt "android.arch.lifecycle:compiler:$archComponentVersion"
     kapt "android.arch.persistence.room:compiler:$archComponentVersion"
 
-    //    implementation "android.arch.persistence.room:runtime:$archComponentVersion"
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation "com.android.support:cardview-v7:$androidLibVersion"
     implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
 
-    /*implementation ('com.github.geniushkg:oauthLibGithub:1.0.2'){
-            transitive = false
-        }*/
-
-    //    api "com.google.dagger:dagger:$daggerVersion"
-
-    //api "com.google.dagger:dagger-android-support:$daggerVersion"
-
-    //    compileOnly 'javax.annotation:jsr250-api:1.0'
-
-    //    api 'javax.inject:javax.inject:1'
-
-    //   annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    //    provided 'javax.annotation:jsr250-api:1.0'
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation project(':helpers')
     implementation project(':oauthLibGithub')
+
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
+
 }
