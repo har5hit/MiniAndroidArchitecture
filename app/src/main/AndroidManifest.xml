@@ -10,14 +10,6 @@
         android:supportsRtl="true"
         android:name=".di.MyApp"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
@@ -26,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.justadeveloper96.githubbrowser.list.ListActivity" />
-        <activity android:name="com.hardikgoswami.oauthLibGithub.OauthActivity"/>
+        <activity android:name="com.justadeveloper96.githubbrowser.list.ListActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
 
     </application>
 

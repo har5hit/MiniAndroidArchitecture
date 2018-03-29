@@ -1,1 +1,1 @@
-include ':app', ':helpers'
+include ':app', ':helpers', ':oauthLibGithub'

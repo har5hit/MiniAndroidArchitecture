@@ -29,28 +29,25 @@ class NoteRepository @Inject constructor(val dao:NoteDao,val executor: AppExecut
     fun fetchUser(name:String):LiveData<Resource<List<Note>>>{
         val users= MutableLiveData<Resource<List<Note>>>()
         executor.networkIO().execute({
-            if (dao.count(name)<=0)
+            if (dao.count("%$name%")<=0)
             {
-                users.value=Resource.loading(null)
-                retrofit.create(GithubService::class.java).getUsers().enqueue(object : Callback<List<Note>>{
-                    override fun onResponse(call: Call<List<Note>>?, response: Response<List<Note>>?) {
-                        response?.apply {
-                            if (isSuccessful)
-                            {
-                                users.postValue(Resource.success(response.body()))
-                            }else
-                            {
-                                users.postValue(Resource.error("Response Unsuccessful!",null))
-                            }
+                users.postValue(Resource.loading(null))
+                try {
+                    val response = retrofit.create(GithubService::class.java).getUsers().execute();
+                    response?.apply {
+                        if (isSuccessful) {
+                            users.postValue(Resource.success(response.body()))
+                            response.body()?.apply { dao.insertAll(this) }
+                        } else {
+                            users.postValue(Resource.error("Response Unsuccessful!", null))
                         }
                     }
-
-                    override fun onFailure(call: Call<List<Note>>?, t: Throwable?) {
-                        users.postValue(Resource.error(com.justadeveloper96.helpers.Utils.getNetworkErrorText(t!!),null))
-                    }
-                })
+                }catch(e:Exception)
+                {
+                    users.postValue(Resource.error(com.justadeveloper96.helpers.Utils.getNetworkErrorText(e),null))
+                }
             }else{
-                users.postValue(Resource.success(dao.find(name)))
+                users.postValue(Resource.success(dao.find("%$name%")))
             }
         })
         return users;

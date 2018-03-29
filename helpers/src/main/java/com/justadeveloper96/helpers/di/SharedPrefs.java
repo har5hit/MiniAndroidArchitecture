@@ -2,6 +2,7 @@ package com.justadeveloper96.helpers.di;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,31 +12,42 @@ import javax.inject.Singleton;
  */
 
 @Singleton
-class SharedPrefs {
-    SharedPreferences prefs;
-    SharedPreferences.Editor editor;
+public class SharedPrefs {
+    private static SharedPrefs sharedPrefs;
+
+    private final SharedPreferences prefs;
+    public static final String PREFERENCE = "github_prefs";
+
 
     @Inject
-    public SharedPrefs(Context context) {
-        editor = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE).edit();
-        prefs = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+    public SharedPrefs(Context c) {
+        // editor = c.getSharedPreferences(c.getPackageName(), Context.MODE_PRIVATE).edit();
+        prefs = c.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
+        Log.d(TAG, "SharedPrefs: created");
     }
+
+    private static final String TAG = "SharedPrefs";
+
+    public static void init(Context context){
+        sharedPrefs=new SharedPrefs(context);
+    }
+
 
     public void save(String id,String value)
     {
-        editor.putString(id,value).commit();
+        getEditor().putString(id,value).apply();
     }
-    public void save(String id,Boolean value)
+    public void save(String id,boolean value)
     {
-        editor.putBoolean(id,value).commit();
+        getEditor().putBoolean(id,value).apply();
     }
     public void save(String id,int value)
     {
-        editor.putInt(id,value).commit();
+        getEditor().putInt(id,value).apply();
     }
     public void save(String id,long value)
     {
-        editor.putLong(id,value).commit();
+        getEditor().putLong(id,value).apply();
     }
 
     public String getString(String id)
@@ -58,7 +70,22 @@ class SharedPrefs {
 
     public void logout()
     {
-        editor.clear().commit();
+        getEditor().clear().apply();
+    }
+
+    public final static Object lock=new Object();
+
+    public static synchronized SharedPrefs getPrefs(Context context)
+    {
+        if(sharedPrefs==null)
+        {
+            synchronized (lock)
+            {
+                sharedPrefs=new SharedPrefs(context);
+                return sharedPrefs;
+            }
+        }
+        return sharedPrefs;
     }
 
     public void setPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener)
@@ -69,5 +96,10 @@ class SharedPrefs {
     public void removeListener(SharedPreferences.OnSharedPreferenceChangeListener listener)
     {
         prefs.unregisterOnSharedPreferenceChangeListener(listener);
+    }
+
+
+    private SharedPreferences.Editor getEditor(){
+        return prefs.edit();
     }
 }

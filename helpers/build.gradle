@@ -1,13 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
 
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -21,14 +25,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    kapt{
+        generateStubs = true
+    }
 }
 
 ext{
-    retrofitVersion='2.3.0'
-    okhttpVersion='3.9.1'
-    daggerVersion='2.8'
-    androidLibVersion='26.1.0'
-    archComponentVersion='1.0.0'
+    retrofitVersion='2.4.0'
 }
 
 dependencies {
@@ -36,35 +44,33 @@ dependencies {
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    testApi 'junit:junit:4.12'
-    androidTestApi 'com.android.support.test:runner:1.0.1'
-    androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     api "com.squareup.retrofit2:retrofit:$retrofitVersion"
     api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+   // api "com.squareup.okhttp3:okhttp:$okhttpVersion"
 
-    debugImplementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    api 'com.readystatesoftware.chuck:library:1.1.0'
 
 
     api "com.google.dagger:dagger:$daggerVersion"
     //api "com.google.dagger:dagger-android-support:$daggerVersion"
 
-    compileOnly 'javax.annotation:jsr250-api:1.0'
     api 'javax.inject:javax.inject:1'
 
-
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    provided 'javax.annotation:jsr250-api:1.0'
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
 
     api 'com.google.code.gson:gson:2.8.2'
 
     api "com.android.support:recyclerview-v7:$androidLibVersion"
-    api "android.arch.lifecycle:runtime:$archComponentVersion"
-    api "android.arch.lifecycle:extensions:$archComponentVersion"
+    api "android.arch.lifecycle:runtime:$archComponentVersionAddon"
+    api "android.arch.lifecycle:extensions:$archComponentVersionAddon"
     annotationProcessor "android.arch.lifecycle:compiler:$archComponentVersion"
 
     api "android.arch.persistence.room:runtime:$archComponentVersion"

@@ -1,3 +1,4 @@
+/*
 package com.justadeveloper96.githubbrowser.helpers;
 
 import android.content.Context;
@@ -5,9 +6,11 @@ import android.content.SharedPreferences;
 
 import java.util.List;
 
+*/
 /**
  * Created by harshith on 20/1/17.
- */
+ *//*
+
 
 public class SharedPrefs {
     private static SharedPrefs sharedPrefs;
@@ -95,4 +98,4 @@ public class SharedPrefs {
     private SharedPreferences.Editor getEditor(){
         return prefs.edit();
     }
-}
+}*/

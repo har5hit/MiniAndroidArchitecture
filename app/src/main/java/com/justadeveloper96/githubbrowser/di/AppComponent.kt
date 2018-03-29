@@ -1,8 +1,7 @@
 package com.justadeveloper96.githubbrowser.di
 
-import android.app.ListActivity
-import android.view.View
-import com.justadeveloper96.githubbrowser.MainActivity
+import com.justadeveloper96.githubbrowser.SplashActivity
+import com.justadeveloper96.githubbrowser.repo.RoomModule
 import com.justadeveloper96.helpers.di.AppModule
 import com.justadeveloper96.helpers.di.RetrofitModule
 
@@ -16,7 +15,8 @@ import dagger.Component;
 import javax.inject.Singleton;
 
 @Singleton
-@Component(modules = arrayOf(AppModule::class,ViewModelModule::class,RetrofitModule::class))
+@Component(modules = arrayOf(AppModule::class,ViewModelModule::class,RetrofitModule::class,RoomModule::class))
 interface AppComponent {
-    fun inject(app: ListActivity)
+    fun inject(activity: com.justadeveloper96.githubbrowser.list.ListActivity)
+    fun inject(activity: SplashActivity)
 }

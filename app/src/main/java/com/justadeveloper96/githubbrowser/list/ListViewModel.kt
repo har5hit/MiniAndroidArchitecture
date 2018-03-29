@@ -2,7 +2,6 @@ package com.justadeveloper96.githubbrowser.list
 
 import android.app.Application
 import android.arch.lifecycle.*
-import com.justadeveloper96.githubbrowser.helpers.SharedPrefs.init
 import com.justadeveloper96.githubbrowser.list.IList
 import com.justadeveloper96.githubbrowser.repo.Note
 import com.justadeveloper96.githubbrowser.repo.NoteRepository
