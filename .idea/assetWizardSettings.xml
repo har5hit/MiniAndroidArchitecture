@@ -77,9 +77,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="51dce2" />
-                            <entry key="outputName" value="ic_file_download_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\harshit" />
+                            <entry key="outputName" value="ic_action_warn" />
+                            <entry key="sourceFile" value="C:\Users\harshit\Downloads\if_101_Warning_183416.svg" />
                           </map>
                         </option>
                       </PersistentState>
