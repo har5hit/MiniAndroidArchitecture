@@ -642,7 +642,7 @@ public class Utils {
             return "";
         }
 
-        return "Failed";
+        return "Some Error Occured. Please try again after some time.";
     }
 
 

@@ -85,15 +85,4 @@
         android:text="@string/no_results"
         android:drawablePadding="24dp"/>
 
-    <!--<View
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:id="@+id/anchor"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/appbar"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>-->
-
 </RelativeLayout>

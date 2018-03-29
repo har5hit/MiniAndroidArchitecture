@@ -6,7 +6,6 @@
         <variable
             name="user"
             type="com.justadeveloper96.githubbrowser.repo.User"/>
-        <import type="com.justadeveloper96.githubbrowser.helpers.Utils"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

@@ -2,25 +2,12 @@ package com.justadeveloper96.githubbrowser.repo
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
-import com.justadeveloper96.githubbrowser.helpers.Utils
-import com.justadeveloper96.helpers.Utils.context
 import com.justadeveloper96.helpers.arch.Resource
 import com.justadeveloper96.helpers.di.AppExecutors
-import com.justadeveloper96.helpers.di.RetrofitModule
-import io.reactivex.Completable
-import io.reactivex.Scheduler
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.util.concurrent.Executor
 import javax.inject.Inject
 import com.google.gson.reflect.TypeToken
 
