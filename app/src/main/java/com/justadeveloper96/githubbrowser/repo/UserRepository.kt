@@ -10,13 +10,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import javax.inject.Inject
 import com.google.gson.reflect.TypeToken
-
+import com.justadeveloper96.githubbrowser.helpers.Constants
+import com.justadeveloper96.helpers.di.SharedPrefs
 
 
 /**
  * Created by harshith on 06-03-2018.
  */
-class UserRepository @Inject constructor(val dao:UserDao, val executor: AppExecutors, val retrofit: Retrofit) {
+class UserRepository @Inject constructor(val dao:UserDao, val executor: AppExecutors, val retrofit: Retrofit, val sharedPrefs: SharedPrefs) {
 
     fun fetchUser(name:String):LiveData<Resource<List<User>>>{
         val users= MutableLiveData<Resource<List<User>>>()
@@ -32,12 +33,21 @@ class UserRepository @Inject constructor(val dao:UserDao, val executor: AppExecu
                         response = retrofit.create(GithubService::class.java).getUsers().execute();
                         result=response.body()!!
                         success=response.isSuccessful
+
+                        if(response.code()==401)
+                        {
+                            sharedPrefs.save(Constants.OAUTH_TOKEN,"")
+                        }
                     }else
                     {
                         val data = retrofit.create(GithubService::class.java).getUsers(name).execute();
                         val listType = object : TypeToken<ArrayList<User>>() {}.type
                         result=Gson().fromJson(JSONObject(data.body()!!.string()).getJSONArray("items").toString(),listType);
                         success=data.isSuccessful
+                        if(data.code()==401)
+                        {
+                            sharedPrefs.save(Constants.OAUTH_TOKEN,"")
+                        }
                     }
 
                     if (success) {

@@ -5,21 +5,24 @@ import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.content_notes_list.*
 import android.support.v7.widget.SearchView
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.TranslateAnimation
-import android.widget.Toast
 import com.justadeveloper96.githubbrowser.R
 import com.justadeveloper96.githubbrowser.di.MyApp
 import com.justadeveloper96.githubbrowser.helpers.Constants
@@ -32,6 +35,7 @@ import com.justadeveloper96.helpers.di.DaggerViewModelFactory
 import com.justadeveloper96.helpers.di.SharedPrefs
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.content_notes_list.*
 import javax.inject.Inject
 
 /**
@@ -53,6 +57,12 @@ class ListActivity: AppCompatActivity(), IList.View {
     private val adapter by lazy { ListAdapter() }
     private val viewmodel by lazy { ViewModelProviders.of(this,viewModelFactory).get(ListViewModel::class.java) as IList.Actions }
 
+    private val chromeTab by lazy { CustomTabsIntent.Builder().apply {
+        setToolbarColor(ContextCompat.getColor(baseContext,R.color.primary_dark))
+        setStartAnimations(baseContext, R.anim.slide_in_right, R.anim.slide_out_left);
+        setExitAnimations(baseContext, R.anim.slide_in_left, R.anim.slide_out_right);
+    }.build()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -93,6 +103,10 @@ class ListActivity: AppCompatActivity(), IList.View {
             }
 
         })
+
+        adapter.listener.subscribe {
+            chromeTab.launchUrl(this, Uri.parse(it));
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

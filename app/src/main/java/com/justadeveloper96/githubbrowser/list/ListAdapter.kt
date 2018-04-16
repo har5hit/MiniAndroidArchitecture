@@ -20,6 +20,7 @@ import com.justadeveloper96.githubbrowser.R
 import com.justadeveloper96.githubbrowser.databinding.ListItemUserBinding
 import com.justadeveloper96.githubbrowser.repo.User
 import io.reactivex.subjects.PublishSubject
+import org.reactivestreams.Publisher
 
 /**
  * Created by harshith on 06-03-2018.
@@ -27,6 +28,9 @@ import io.reactivex.subjects.PublishSubject
 class ListAdapter: RecyclerView.Adapter<ListAdapter.UserViewHolder>() {
 
     val list:SortedList<User>
+
+    val listener = PublishSubject.create<String>()
+
     init {
         list=SortedList(User::class.java,object : SortedListAdapterCallback<User>(this){
             override fun areItemsTheSame(item1: User?, item2: User?): Boolean = item1!!.id == item2!!.id
@@ -67,7 +71,17 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.UserViewHolder>() {
         }
     }
 
-    inner class UserViewHolder constructor(val binding: ListItemUserBinding): RecyclerView.ViewHolder(binding.root), RequestListener<Drawable> {
+    inner class UserViewHolder constructor(val binding: ListItemUserBinding): RecyclerView.ViewHolder(binding.root), RequestListener<Drawable>, View.OnClickListener {
+        override fun onClick(v: View?) {
+            list.get(adapterPosition).htmlUrl?.let {
+                listener.onNext(it)
+            }
+        }
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
         override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
             binding.progressBar.visibility=View.GONE
             return false
