@@ -34,8 +34,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    SharedPrefs provideSharedPrefs() {
-        return new SharedPrefs(mApp);
+    SharedPrefs provideSharedPrefs(Context context) {
+        return new SharedPrefs(context);
     }
 
     @Provides
