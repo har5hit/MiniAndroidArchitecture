@@ -45,9 +45,6 @@ import javax.inject.Inject
 class ListActivity: AppCompatActivity(), IList.View {
 
     @Inject
-    lateinit var sharedPrefs: SharedPrefs
-
-    @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory
 
     var userName:String?=null

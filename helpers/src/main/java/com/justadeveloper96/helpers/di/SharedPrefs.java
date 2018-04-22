@@ -21,7 +21,6 @@ public class SharedPrefs {
 
     @Inject
     public SharedPrefs(Context c) {
-        // editor = c.getSharedPreferences(c.getPackageName(), Context.MODE_PRIVATE).edit();
         prefs = c.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
         Log.d(TAG, "SharedPrefs: created");
     }
@@ -82,7 +81,6 @@ public class SharedPrefs {
             synchronized (lock)
             {
                 sharedPrefs=new SharedPrefs(context);
-                return sharedPrefs;
             }
         }
         return sharedPrefs;
