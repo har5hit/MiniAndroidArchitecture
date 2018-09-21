@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.justadeveloper96.githubbrowser.di.DIHolder
 import com.justadeveloper96.githubbrowser.di.MyApp
 import com.justadeveloper96.githubbrowser.helpers.Constants
 import com.justadeveloper96.githubbrowser.list.ListActivity
@@ -22,9 +23,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        (applicationContext as MyApp).injector.inject(this)
-
+        DIHolder.injector.inject(this)
         checkAndLaunch()
     }
 

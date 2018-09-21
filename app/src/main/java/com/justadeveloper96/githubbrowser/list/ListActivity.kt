@@ -24,18 +24,19 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.TranslateAnimation
 import com.justadeveloper96.githubbrowser.R
+import com.justadeveloper96.githubbrowser.di.DIHolder
 import com.justadeveloper96.githubbrowser.di.MyApp
 import com.justadeveloper96.githubbrowser.helpers.Constants
 import com.justadeveloper96.githubbrowser.helpers.Font
-import com.justadeveloper96.githubbrowser.repo.User
+import com.justadeveloper96.githubbrowser.repo.db.User
 import com.justadeveloper96.helpers.Utils.getThemeColor
 import com.justadeveloper96.helpers.arch.Resource
 import com.justadeveloper96.helpers.arch.Status
 import com.justadeveloper96.helpers.di.DaggerViewModelFactory
-import com.justadeveloper96.helpers.di.SharedPrefs
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_notes_list.*
+import kotlinx.android.synthetic.main.content_notes_list.view.*
 import javax.inject.Inject
 
 /**
@@ -48,7 +49,6 @@ class ListActivity: AppCompatActivity(), IList.View {
     lateinit var viewModelFactory: DaggerViewModelFactory
 
     var userName:String?=null
-    override fun isFilterApplied(): Boolean = !userName.isNullOrEmpty();
 
     private val keplarFont by lazy {  Font.getFont(baseContext, Constants.keplarStdFont) }
     private val adapter by lazy { ListAdapter() }
@@ -58,46 +58,46 @@ class ListActivity: AppCompatActivity(), IList.View {
         setToolbarColor(ContextCompat.getColor(baseContext,R.color.primary_dark))
         setStartAnimations(baseContext, R.anim.slide_in_right, R.anim.slide_out_left);
         setExitAnimations(baseContext, R.anim.slide_in_left, R.anim.slide_out_right);
-    }.build()
-    }
+    }.build() }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        (applicationContext as MyApp).injector.inject(this)
+        DIHolder.injector.inject(this)
 
         initViews()
 
         //get filters from viewmodel if there was any before configuration change
-        viewmodel.getFilters().observe(this,Observer<String>{t->
-            t?.let {
-                userName=t
-            }
+        viewmodel.getFilters().observe(this,Observer<String>{it?.let {state->
+            userName=state
+        }
         })
 
-        viewmodel.getList().observe(this, Observer<Resource<List<User>>> { t ->
-            t?.let {
-                //remove all empty texts
-                reset()
-                adapter.update(t.data)
-                when (t.status) {
-                    Status.LOADING -> {
-                        showLoading(true)
-                    }
-
-                    Status.ERROR -> {
-                        showErrorScreen(t.message!!)
-                    }
-
-                    Status.SUCCESS -> {
-                        if(t.data== null || t.data!!.isEmpty())
-                        {
-                            showEmptyUserScreen()
-                        }
-                    }
+        viewmodel.getList().observe(this, Observer<Resource<List<User>>> { it?.let { resource ->
+            //remove all empty texts
+            reset()
+            adapter.update(resource.data)
+            when (resource.status) {
+                Status.LOADING -> {
+                    showLoading(true)
                 }
 
+                Status.ERROR,Status.UNSUCCESSFUL -> {
+                    resource.message?.let {  showErrorScreen(it) }
+                }
+
+                Status.SUCCESS -> {
+                    resource.data?.isNotEmpty()?.let {
+                        showEmptyUserScreen()
+                    }
+                }
+                else -> {
+                }
             }
+
+        }
 
         })
 
@@ -141,6 +141,7 @@ class ListActivity: AppCompatActivity(), IList.View {
     }
 
 
+    override fun isFilterApplied(): Boolean = !userName.isNullOrEmpty();
 
     private fun reset() {
         tv_error_list.visibility = View.GONE
@@ -160,19 +161,23 @@ class ListActivity: AppCompatActivity(), IList.View {
         tv_empty_search_list.typeface=keplarFont
 
         //recyclerview setup
-        recyclerView.layoutManager=LinearLayoutManager(baseContext)
-        recyclerView.adapter=adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
-        recyclerView.itemAnimator = SlideInLeftAnimator()
+        recyclerView.apply {
+            layoutManager=LinearLayoutManager(baseContext)
+            adapter=adapter
+            addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
+            itemAnimator = SlideInLeftAnimator()
+        }
     }
 
     override fun showEmptyUserScreen() {
         tv_empty_search_list.visibility = View.VISIBLE
     }
+
     override fun showErrorScreen(error: String) {
         tv_error_list.visibility=View.VISIBLE
         tv_error_list.text=error
     }
+
     override fun showLoading(loading: Boolean) {
         val value=if (loading) View.VISIBLE else View.GONE
         loader.visibility=value
@@ -242,6 +247,6 @@ class ListActivity: AppCompatActivity(), IList.View {
     }
 
     private fun isRtl(resources: Resources): Boolean {
-        return resources.getConfiguration().getLayoutDirection() === View.LAYOUT_DIRECTION_RTL
+        return resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
     }
 }

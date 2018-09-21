@@ -26,6 +26,7 @@ import android.support.annotation.Nullable;
 import static com.justadeveloper96.helpers.arch.Status.ERROR;
 import static com.justadeveloper96.helpers.arch.Status.LOADING;
 import static com.justadeveloper96.helpers.arch.Status.SUCCESS;
+import static com.justadeveloper96.helpers.arch.Status.UNSUCCESSFUL;
 
 
 /**
@@ -39,6 +40,9 @@ public class Resource<T> {
 
     @Nullable
     public final String message;
+
+
+    public int code;
 
     @Nullable
     public final T data;
@@ -55,6 +59,10 @@ public class Resource<T> {
 
     public static <T> Resource<T> error(String msg, @Nullable T data) {
         return new Resource<>(ERROR, data, msg);
+    }
+
+    public static <T> Resource<T> unsuccessful(String msg, @Nullable T data) {
+        return new Resource<>(UNSUCCESSFUL, data, msg);
     }
 
     public static <T> Resource<T> loading(@Nullable T data) {

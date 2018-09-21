@@ -26,12 +26,6 @@ public class RetrofitModule{
         this.networkInterceptors=networkInterceptors;
     }
 
-   /* @Provides
-    @Singleton
-    public <T> T provideService(Class<T> service) {
-        return provideRetrofit().create(service);
-    }*/
-
     @Provides
     @Singleton
     public Retrofit provideRetrofit(OkHttpClient client) {
@@ -59,39 +53,6 @@ public class RetrofitModule{
                 httpClient.addNetworkInterceptor(networkInterceptor);
             }
         }
-
-        /*  final String token=SharedPrefs.getPrefs().getString("token");
-        if(!token.isEmpty())
-        {
-            httpClient.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request original = chain.request();
-                    // Request customization: add request headers
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .header("Authorization", "Bearer "+token)
-                            .addHeader("Accept", ""); // <-- this is the important line
-
-                    Request request = requestBuilder.build();
-                    return chain.proceed(request);
-                }
-            });
-        }else {
-            httpClient.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request original = chain.request();
-
-                    // Request customization: add request headers
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .header("Accept", ""); // <-- this is the important line
-
-                    Request request = requestBuilder.build();
-                    return chain.proceed(request);
-                }
-            });
-        }*/
-
         return httpClient.build();
     }
 }

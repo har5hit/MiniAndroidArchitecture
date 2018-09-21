@@ -8,19 +8,16 @@ import android.support.v7.widget.util.SortedListAdapterCallback
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.daimajia.swipe.SwipeLayout
 import com.justadeveloper96.githubbrowser.R
 import com.justadeveloper96.githubbrowser.databinding.ListItemUserBinding
-import com.justadeveloper96.githubbrowser.repo.User
+import com.justadeveloper96.githubbrowser.repo.db.User
 import io.reactivex.subjects.PublishSubject
-import org.reactivestreams.Publisher
 
 /**
  * Created by harshith on 06-03-2018.

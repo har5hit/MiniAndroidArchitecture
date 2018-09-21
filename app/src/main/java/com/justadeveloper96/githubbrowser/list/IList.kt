@@ -1,7 +1,7 @@
 package com.justadeveloper96.githubbrowser.list
 
 import android.arch.lifecycle.LiveData
-import com.justadeveloper96.githubbrowser.repo.User
+import com.justadeveloper96.githubbrowser.repo.db.User
 import com.justadeveloper96.helpers.arch.Resource
 
 /**

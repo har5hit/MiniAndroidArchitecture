@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GithubBrowser.iml" filepath="$PROJECT_DIR$/.idea/GithubBrowser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MiniAndroidArchitecture.iml" filepath="$PROJECT_DIR$/MiniAndroidArchitecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/helpers/helpers.iml" filepath="$PROJECT_DIR$/helpers/helpers.iml" />
       <module fileurl="file://$PROJECT_DIR$/oauthLibGithub/oauthLibGithub.iml" filepath="$PROJECT_DIR$/oauthLibGithub/oauthLibGithub.iml" />

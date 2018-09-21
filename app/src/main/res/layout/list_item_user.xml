@@ -5,7 +5,7 @@
     <data>
         <variable
             name="user"
-            type="com.justadeveloper96.githubbrowser.repo.User"/>
+            type="com.justadeveloper96.githubbrowser.repo.db.User"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

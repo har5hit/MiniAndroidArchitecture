@@ -1,9 +1,7 @@
 package com.justadeveloper96.githubbrowser.list
 
-import android.app.Application
 import android.arch.lifecycle.*
-import com.justadeveloper96.githubbrowser.list.IList
-import com.justadeveloper96.githubbrowser.repo.User
+import com.justadeveloper96.githubbrowser.repo.db.User
 import com.justadeveloper96.githubbrowser.repo.UserRepository
 import com.justadeveloper96.helpers.arch.Resource
 import javax.inject.Inject

@@ -32,15 +32,4 @@ public class AppModule {
         return mApp;
     }
 
-    @Provides
-    @Singleton
-    SharedPrefs provideSharedPrefs(Context context) {
-        return new SharedPrefs(context);
-    }
-
-    @Provides
-    @Singleton
-    AppExecutors provideExecutors() {
-        return new AppExecutors();
-    }
 }

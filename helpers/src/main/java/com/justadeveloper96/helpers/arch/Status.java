@@ -28,5 +28,6 @@ package com.justadeveloper96.helpers.arch;
 public enum Status {
     SUCCESS,
     ERROR,
-    LOADING
+    LOADING,
+    UNSUCCESSFUL
 }
