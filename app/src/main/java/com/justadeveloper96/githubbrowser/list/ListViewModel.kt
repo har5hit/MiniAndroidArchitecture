@@ -1,6 +1,7 @@
 package com.justadeveloper96.githubbrowser.list
 
 import android.arch.lifecycle.*
+import com.justadeveloper96.githubbrowser.model.UserModel
 import com.justadeveloper96.githubbrowser.repo.db.User
 import com.justadeveloper96.githubbrowser.repo.UserRepository
 import com.justadeveloper96.helpers.arch.Resource
@@ -9,7 +10,7 @@ import javax.inject.Inject
 /**
  * Created by harshith on 06-03-2018.
  */
-class ListViewModel @Inject constructor(val repo: UserRepository): ViewModel(), IList.Actions
+class ListViewModel @Inject constructor(val userModel: UserModel): ViewModel(), IList.Actions
 {
     private val appliedFilters:MutableLiveData<String>
 
@@ -22,7 +23,7 @@ class ListViewModel @Inject constructor(val repo: UserRepository): ViewModel(), 
 
 
     override fun getList(): LiveData<Resource<List<User>>>{
-        return Transformations.switchMap(appliedFilters) { input -> repo.fetchUser(name = input) }
+        return Transformations.switchMap(appliedFilters) { input -> userModel.getUser(input) }
     }
 
     override fun applyFilter(name: String) {

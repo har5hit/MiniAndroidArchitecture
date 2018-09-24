@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.res.Resources
+import android.databinding.DataBindingUtil.setContentView
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -24,12 +25,15 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.TranslateAnimation
+import com.justadeveloper96.githubbrowser.AuthBasedActivity
 import com.justadeveloper96.githubbrowser.R
+import com.justadeveloper96.githubbrowser.R.id.*
 import com.justadeveloper96.githubbrowser.di.DIHolder
 import com.justadeveloper96.githubbrowser.di.MyApp
 import com.justadeveloper96.githubbrowser.helpers.Constants
 import com.justadeveloper96.githubbrowser.helpers.Font
 import com.justadeveloper96.githubbrowser.repo.db.User
+import com.justadeveloper96.helpers.Utils.context
 import com.justadeveloper96.helpers.Utils.getThemeColor
 import com.justadeveloper96.helpers.arch.Resource
 import com.justadeveloper96.helpers.arch.Status
@@ -44,7 +48,7 @@ import javax.inject.Inject
  * Created by harshith on 06-03-2018.
  */
 
-class ListActivity: AppCompatActivity(), IList.View {
+class ListActivity: AuthBasedActivity(), IList.View {
 
     @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory

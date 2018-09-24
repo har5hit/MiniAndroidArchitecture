@@ -29,5 +29,6 @@ public enum Status {
     SUCCESS,
     ERROR,
     LOADING,
-    UNSUCCESSFUL
+    UNSUCCESSFUL,
+    LOGOUT
 }

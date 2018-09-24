@@ -46,8 +46,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.UserViewHolder>() {
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val item=list.get(position)
-        holder.binding.user=item
-        holder.setImage(item.avatarUrl!!)
+        holder.setData(item)
     }
 
     override fun onViewRecycled(holder: UserViewHolder) {
@@ -89,10 +88,11 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.UserViewHolder>() {
             return false
         }
 
-        fun setImage(url: String)
+        fun setData(user: User)
         {
+            binding.user=user
             binding.progressBar.visibility=View.VISIBLE
-            Glide.with(binding.imageView.context).load(url).apply(RequestOptions.circleCropTransform()).listener(this).into(binding.imageView)
+            Glide.with(binding.imageView.context).load(user.avatarUrl).apply(RequestOptions.circleCropTransform()).listener(this).into(binding.imageView)
         }
 
         fun clearImage()

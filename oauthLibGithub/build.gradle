@@ -43,8 +43,8 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:$androidLibVersion"
-    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation deps.support.appcompat
+    api deps.okhttp.runtime
     /*
     compile files('libs/okhttp.jar')
     compile files('libs/okio.jar')*/

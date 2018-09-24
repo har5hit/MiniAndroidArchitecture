@@ -42,44 +42,36 @@ ext{
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api deps.kotlin.stdlib
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    api deps.retrofit.runtime
+    api deps.retrofit.gson
 
-    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-   // api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    api deps.okhttp.logger
 
-    api "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    api 'com.readystatesoftware.chuck:library:1.1.0'
+    api deps.chuck
 
-
-    api "com.google.dagger:dagger:$daggerVersion"
-    //api "com.google.dagger:dagger-android-support:$daggerVersion"
+    api deps.dagger.runtime
 
     api 'javax.inject:javax.inject:1'
 
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor deps.dagger.compiler
+    kapt deps.dagger.compiler
     compileOnly 'javax.annotation:jsr250-api:1.0'
 
-    api 'com.google.code.gson:gson:2.8.2'
+    api deps.google.gson
 
-    api "com.android.support:recyclerview-v7:$androidLibVersion"
-    api "android.arch.lifecycle:runtime:$archComponentVersionAddon"
-    api "android.arch.lifecycle:extensions:$archComponentVersionAddon"
-    annotationProcessor "android.arch.lifecycle:compiler:$archComponentVersion"
+    api deps.support.recyclerview
+    api deps.lifecycle.runtime
+    api deps.lifecycle.extensions
+    annotationProcessor deps.lifecycle.compiler
 
-    api "android.arch.persistence.room:runtime:$archComponentVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$archComponentVersion"
+    api deps.room.runtime
+    annotationProcessor deps.room.compiler
 
-    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    api 'io.reactivex.rxjava2:rxjava:2.1.5'
+    api deps.glide.runtime
 
-    api 'com.github.bumptech.glide:glide:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    annotationProcessor deps.glide.compiler
 
 }
