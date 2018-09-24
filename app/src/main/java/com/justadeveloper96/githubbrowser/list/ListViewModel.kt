@@ -22,7 +22,7 @@ class ListViewModel @Inject constructor(val repo: UserRepository): ViewModel(), 
 
 
     override fun getList(): LiveData<Resource<List<User>>>{
-        return Transformations.switchMap(appliedFilters,{input -> repo.fetchUser(name = input) })
+        return Transformations.switchMap(appliedFilters) { input -> repo.fetchUser(name = input) }
     }
 
     override fun applyFilter(name: String) {
