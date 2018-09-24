@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -75,7 +76,7 @@ class ListActivity: AppCompatActivity(), IList.View {
         }
         })
 
-        viewmodel.getList().observe(this, Observer<Resource<List<User>>> { it?.let { resource ->
+        viewmodel.getList().observe(this, Observer<Resource<List<User>>> { it?.also { resource ->
             //remove all empty texts
             reset()
             adapter.update(resource.data)
@@ -89,11 +90,10 @@ class ListActivity: AppCompatActivity(), IList.View {
                 }
 
                 Status.SUCCESS -> {
-                    resource.data?.isNotEmpty()?.let {
+                    if (resource.data == null || resource.data!!.isEmpty())
+                    {
                         showEmptyUserScreen()
                     }
-                }
-                else -> {
                 }
             }
 
@@ -163,7 +163,7 @@ class ListActivity: AppCompatActivity(), IList.View {
         //recyclerview setup
         recyclerView.apply {
             layoutManager=LinearLayoutManager(baseContext)
-            adapter=adapter
+            adapter=this@ListActivity.adapter
             addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             itemAnimator = SlideInLeftAnimator()
         }
